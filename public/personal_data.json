@@ -1,0 +1,67 @@
+{
+    "name": "Fabrizio Gallazzi",
+    "address": "Via Carducci 37B, 21010 Besnate (VA)",
+    "phone": {
+      "hidden": true,
+      "value": "349 846 5891"
+    },
+    "email": {
+      "hidden": true,
+      "value": "fabrizio.gallazzi@gmail.com"
+    },
+    "about": {
+      "it": "Sono un Front-End Developer con esperienza nello sviluppo di interfacce moderne e usabilità.",
+      "en": "I am a Front-End Developer with experience in modern UI development and usability."
+    },
+    "additionalInfo": {
+      "it": "Appassionato di tecnologia, intelligenza artificiale e sviluppo software. Attualmente lavoro presso Euronics DIMO come addetto vendita.",
+      "en": "Passionate about technology, AI, and software development. Currently working at Euronics DIMO as a sales assistant."
+    },
+    "education": [
+      {
+        "school": "Università degli Studi di Milano",
+        "degree": {
+          "it": "Laurea in Informatica",
+          "en": "Bachelor's Degree in Computer Science"
+        },
+        "years": "2012 - 2016",
+        "description": {
+          "it": "Specializzazione in sviluppo software e interfacce utente.",
+          "en": "Specialization in software development and user interfaces."
+        }
+      }
+    ],
+    "skills": [
+      {
+        "name": {
+          "it": "HTML & CSS",
+          "en": "HTML & CSS"
+        },
+        "level": {
+          "it": "Avanzato",
+          "en": "Advanced"
+        }
+      },
+      {
+        "name": {
+          "it": "JavaScript",
+          "en": "JavaScript"
+        },
+        "level": {
+          "it": "Avanzato",
+          "en": "Advanced"
+        }
+      },
+      {
+        "name": {
+          "it": "React.js",
+          "en": "React.js"
+        },
+        "level": {
+          "it": "Intermedio",
+          "en": "Intermediate"
+        }
+      }
+    ]
+  }
+  
