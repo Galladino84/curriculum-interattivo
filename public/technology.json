@@ -1,0 +1,10 @@
+{
+  "it": {
+    "title": "Tecnologia utilizzata",
+    "description": "Questo curriculum è stato realizzato utilizzando React, sfruttando un ambiente di sviluppo su CodeSandbox. I dati vengono caricati in tempo reale da file JSON per garantire dinamicità e modularità."
+  },
+  "en": {
+    "title": "Technology Used",
+    "description": "This resume was built using React, developed in a CodeSandbox environment. The data is dynamically loaded from JSON files to ensure flexibility and modularity."
+  }
+}

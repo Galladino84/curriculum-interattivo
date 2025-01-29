@@ -1,68 +1,79 @@
 {
-    "name": "Fabrizio Gallazzi",
-    "address": "Via Carducci 37B, 21010 Besnate (VA)",
-    "photo":"public/images/foto_profilo.jpeg",
-    "phone": {
-        "it": "3498465891",
-        "en": "3498465891"
-    },
-    "email": {
-        "it": "fabrizio.gallazzi@gmail.com ",
-        "en": "fabrizio.gallazzi@gmail.com"
-    },
-    "about": {
-      "it": "Sono un Front-End Developer con esperienza nello sviluppo di interfacce moderne e usabilità.",
-      "en": "I am a Front-End Developer with experience in modern UI development and usability."
-    },
-    "additionalInfo": {
-      "it": "Appassionato di tecnologia, intelligenza artificiale e sviluppo software. Attualmente lavoro presso Euronics DIMO come addetto vendita.",
-      "en": "Passionate about technology, AI, and software development. Currently working at Euronics DIMO as a sales assistant."
-    },
-    "education": [
-      {
-        "school": "Università degli Studi di Milano",
-        "degree": {
-          "it": "Laurea in Informatica",
-          "en": "Bachelor's Degree in Computer Science"
-        },
-        "years": "2012 - 2016",
-        "description": {
-          "it": "Specializzazione in sviluppo software e interfacce utente.",
-          "en": "Specialization in software development and user interfaces."
-        }
-      }
-    ],
-    "skills": [
-      {
-        "name": {
-          "it": "HTML & CSS",
-          "en": "HTML & CSS"
-        },
-        "level": {
-          "it": "Avanzato",
-          "en": "Advanced"
-        }
+  "name": "Fabrizio Gallazzi",
+  "address": "Via Carducci 37B, 21010 Besnate (VA)",
+  "photo": "public/images/foto_profilo.jpeg",
+  "phone": {
+    "it": "3498465891",
+    "en": "3498465891"
+  },
+  "email": {
+    "it": "fabrizio.gallazzi@gmail.com ",
+    "en": "fabrizio.gallazzi@gmail.com"
+  },
+  "about": {
+    "it": "Sono un Front-End Developer con esperienza nello sviluppo di interfacce moderne e usabilità.",
+    "en": "I am a Front-End Developer with experience in modern UI development and usability."
+  },
+  "additionalInfo": {
+    "it": "Appassionato di tecnologia, intelligenza artificiale e sviluppo software. Attualmente lavoro presso Euronics DIMO come addetto vendita.",
+    "en": "Passionate about technology, AI, and software development. Currently working at Euronics DIMO as a sales assistant."
+  },
+  "education": [
+    {
+      "school": "Università degli Studi di Milano",
+      "degree": {
+        "it": "Laurea in Informatica",
+        "en": "Bachelor's Degree in Computer Science"
       },
-      {
-        "name": {
-          "it": "JavaScript",
-          "en": "JavaScript"
-        },
-        "level": {
-          "it": "Avanzato",
-          "en": "Advanced"
-        }
-      },
-      {
-        "name": {
-          "it": "React.js",
-          "en": "React.js"
-        },
-        "level": {
-          "it": "Intermedio",
-          "en": "Intermediate"
-        }
+      "years": "2012 - 2016",
+      "description": {
+        "it": "Specializzazione in sviluppo software e interfacce utente.",
+        "en": "Specialization in software development and user interfaces."
       }
-    ]
-  }
-  
+    }
+  ],
+  "bio": {
+    "it": "Professionista con esperienza nel settore della vendita e del supporto tecnico, con una solida base nello sviluppo web e nella gestione di progetti.",
+    "en": "Professional with experience in sales and technical support, with a solid background in web development and project management"
+  },
+  "hobby": {
+    "it": "Nel tempo libero amo immergermi nel mondo del gaming e dei giochi di ruolo, sia dal vivo che cartacei. Sono un appassionato di scrittura creativa e worldbuilding, con un particolare interesse per la narrativa fantasy e fantascientifica.",
+    "en": "In my free time I love to immerse myself in the world of gaming and role-playing games, both live and paper. I am a fan of creative writing and worldbuilding, with a particular interest in fantasy and science fiction fiction"
+  },
+  "goals": {
+    "it": "Aspiro a trasformare la mia passione per la scrittura e il worldbuilding in una carriera nel content creation, unendo creatività e tecnologia. Il mio obiettivo è creare contenuti originali e coinvolgenti, esplorando le potenzialità dell’intelligenza artificiale nel settore della narrativa e del game design.",
+    "en": "I aim to turn my passion for writing and worldbuilding into a career in content creation, blending creativity and technology. My goal is to craft original and engaging content while exploring the potential of artificial intelligence in storytelling and game design"
+  },
+  "skills": [
+    {
+      "name": {
+        "it": "HTML & CSS",
+        "en": "HTML & CSS"
+      },
+      "level": {
+        "it": "Avanzato",
+        "en": "Advanced"
+      }
+    },
+    {
+      "name": {
+        "it": "JavaScript",
+        "en": "JavaScript"
+      },
+      "level": {
+        "it": "Avanzato",
+        "en": "Advanced"
+      }
+    },
+    {
+      "name": {
+        "it": "React.js",
+        "en": "React.js"
+      },
+      "level": {
+        "it": "Intermedio",
+        "en": "Intermediate"
+      }
+    }
+  ]
+}

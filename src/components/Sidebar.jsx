@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Funzione per caricare i dati JSON
 const fetchPersonalData = async () => {
   try {
     const response = await fetch("/personal_data.json");
@@ -16,6 +15,7 @@ const fetchPersonalData = async () => {
 const Sidebar = ({ language, setLanguage }) => {
   const [personalData, setPersonalData] = useState(null);
   const [showContacts, setShowContacts] = useState(false);
+  const [expanded, setExpanded] = useState(null); // Per l'accordion
 
   useEffect(() => {
     fetchPersonalData().then((data) => {
@@ -34,9 +34,10 @@ const Sidebar = ({ language, setLanguage }) => {
     <motion.aside
       initial={{ width: "100%" }}
       animate={{ width: "100%" }}
-      className="bg-gray-900 text-white h-auto md:h-screen w-full md:w-1/4 xl:w-1/4 fixed md:relative top-0 left-0 shadow-lg overflow-hidden"
+      className="bg-gray-900 text-white h-auto md:h-screen w-full md:w-3/10 md:relative top-0 left-0 shadow-lg overflow-hidden"
     >
       <div className="h-full flex flex-col items-center p-6">
+        {/* FOTO PROFILO */}
         <img
           src={personalData.photo}
           alt="Profile"
@@ -45,6 +46,7 @@ const Sidebar = ({ language, setLanguage }) => {
         <h1 className="text-xl font-bold mt-2">{personalData.name}</h1>
         <p className="text-sm text-gray-400">{personalData.address}</p>
 
+        {/* BOTTONE CONTATTI */}
         <button
           onClick={() => setShowContacts(!showContacts)}
           className="mt-2 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-sm"
@@ -58,6 +60,7 @@ const Sidebar = ({ language, setLanguage }) => {
             : "Show Contacts"}
         </button>
 
+        {/* CONTATTI */}
         <AnimatePresence>
           {showContacts && (
             <motion.div
@@ -72,6 +75,82 @@ const Sidebar = ({ language, setLanguage }) => {
           )}
         </AnimatePresence>
 
+        {/* ACCORDION "ABOUT ME" */}
+        <div className="w-full mt-6">
+          <h3 className="text-lg font-semibold text-center">About Me</h3>
+
+          {/* Sezione 1 */}
+          <div className="mt-2">
+            <button
+              className="w-full text-left px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600"
+              onClick={() => setExpanded(expanded === "bio" ? null : "bio")}
+            >
+              📜 Bio
+            </button>
+            <AnimatePresence>
+              {expanded === "bio" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="p-3 bg-gray-800 rounded-lg text-sm text-gray-300 mt-1"
+                >
+                  <p>{personalData.bio[language]}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Sezione 2 */}
+          <div className="mt-2">
+            <button
+              className="w-full text-left px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600"
+              onClick={() =>
+                setExpanded(expanded === "hobbies" ? null : "hobbies")
+              }
+            >
+              🎮 Hobby
+            </button>
+            <AnimatePresence>
+              {expanded === "hobbies" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="p-3 bg-gray-800 rounded-lg text-sm text-gray-300 mt-1"
+                >
+                  <p>{personalData.hobby[language]}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Sezione 3 */}
+          <div className="mt-2">
+            <button
+              className="w-full text-left px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600"
+              onClick={() =>
+                setExpanded(expanded === "goals" ? null : "goals")
+              }
+            >
+              🎯 {language === "it" ? "Obiettivi" : "Goals"}
+            </button>
+            <AnimatePresence>
+              {expanded === "goals" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="p-3 bg-gray-800 rounded-lg text-sm text-gray-300 mt-1"
+                >
+                  <p>{personalData.goals[language]}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* CAMBIO LINGUA */}
         <button
           onClick={() => setLanguage(language === "it" ? "en" : "it")}
           className="mt-4 px-4 py-2 bg-green-500 rounded-lg hover:bg-green-400 w-full"

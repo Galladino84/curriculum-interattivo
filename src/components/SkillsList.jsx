@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
+// Funzione per caricare i dati delle competenze
 const fetchSkillsData = async () => {
   try {
     const response = await fetch("/skills.json");
@@ -13,34 +15,40 @@ const fetchSkillsData = async () => {
 
 const SkillsList = ({ language }) => {
   const [skills, setSkills] = useState([]);
+  const [expanded, setExpanded] = useState(null); // Stato per l'accordion
 
   useEffect(() => {
     fetchSkillsData().then((data) => {
-      if (data) {
-        console.log("✅ Skill ricevute:", data);
-        setSkills(data[language] ?? []); // Evita valori null o undefined
+      if (data && data[language]) {
+        console.log("✅ Skill ricevute:", data[language]);
+        setSkills(data[language]);
       }
     });
   }, [language]);
 
   if (!skills || skills.length === 0) {
-    return <p className="text-gray-500">⚠️ Nessuna skill disponibile.</p>;
+    return <p className="text-gray-500">⚠️ Nessuna competenza disponibile.</p>;
   }
 
   return (
     <div className="mt-6">
       <h3 className="text-xl font-bold">Competenze</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      
+      {/* Lista principale delle competenze */}
+      <div className="space-y-2">
         {skills.map((skill, index) => (
           <div
             key={index}
-            className="bg-white p-4 rounded-lg shadow-md text-center"
+            className="bg-white p-4 rounded-lg shadow-md w-full flex justify-between items-center"
           >
-            <h4 className="text-lg font-semibold">{skill.name}</h4>
+            <h4 className="text-md font-semibold">{skill.name}</h4>
             <p className="text-gray-600">{skill.level}</p>
           </div>
         ))}
       </div>
+
+      {/* Sezione delle competenze aggiuntive con Accordion */}
+      
     </div>
   );
 };

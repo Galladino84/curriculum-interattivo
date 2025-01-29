@@ -1,15 +1,14 @@
 {
-    "it": [
-      { "name": "JavaScript", "level": "Avanzato" },
-      { "name": "React.js", "level": "Intermedio" },
-      { "name": "CSS", "level": "Base" },
-      { "name": "Git", "level": "Iniziale" }
-    ],
-    "en": [
-      { "name": "JavaScript", "level": "Advanced" },
-      { "name": "React.js", "level": "Intermediate" },
-      { "name": "CSS", "level": "Basic" },
-      { "name": "Git", "level": "Beginner" }
-    ]
-  }
-  
+  "it": [
+    { "name": "JavaScript", "level": "Intermedio" },
+    { "name": "React.js", "level": "Base" },
+    { "name": "CSS", "level": "Intermedio" },
+    { "name": "Git", "level": "Iniziale" }
+  ],
+  "en": [
+    { "name": "JavaScript", "level": "Intermediate" },
+    { "name": "React.js", "level": "Basic" },
+    { "name": "CSS", "level": "Intermediate" },
+    { "name": "Git", "level": "Beginner" }
+  ]
+}

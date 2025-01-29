@@ -1,27 +1,38 @@
 {
-    "it": [
-      {
-        "title": "Software Developer",
-        "company": "Tech Corp",
-        "date": "2020 - Present"
-      },
-      {
-        "title": "Web Designer",
-        "company": "Web Studio",
-        "date": "2018 - 2020"
-      }
-    ],
-    "en": [
-      {
-        "title": "Software Developer",
-        "company": "Tech Corp",
-        "date": "2020 - Present"
-      },
-      {
-        "title": "Web Designer",
-        "company": "Web Studio",
-        "date": "2018 - 2020"
-      }
-    ]
-  }
-  
+  "it": [
+    {
+      "title": "Addetto Vendita",
+      "company": "DIMO S.p.A. - Euronics Tradate",
+      "location": "Via della Fornace Cortellezzi, 21049 Tradate (VA)",
+      "period": "Giugno 2021 - Attuale",
+      "industry": "Commercio al dettaglio di informatica, elettrodomestici, telefonia e games",
+      "description": "La mia mansione principale è l'affiancamento del cliente per tutto il processo di acquisto, dal consiglio sul prodotto da acquistare al suo eventuale ordine presso la sede o un altro punto vendita della catena.\n\nGestisco inoltre la presa in carico di prodotti che necessitano di assistenza: dopo una fase iniziale di test per individuare il problema, registro il prodotto e lo invio alla sede, da cui verrà smistato al centro di riparazione autorizzato."
+    },
+    {
+      "title": "Frontend Developer",
+      "company": "MotorK",
+      "location": "Via Ludovico d'Aragona, 9, 20132 Milano (MI)",
+      "period": "Marzo 2016 - Dicembre 2020",
+      "industry": "Azienda tecnologica specializzata nell'automotive",
+      "description": "La mia principale responsabilità era la realizzazione di temi WordPress per la raccolta di informazioni commerciali e la generazione di lead profilati in base alle esigenze del cliente.\n\nInoltre, mi occupavo della creazione di DEM per la comunicazione di massa e del mantenimento dei siti della piattaforma proprietaria. Facevo parte del team di supporto tecnico di primo e secondo livello, con la possibilità di operare correzioni e modifiche richieste dal cliente su software dedicati."
+    }
+  ],
+  "en": [
+    {
+      "title": "Sales Assistant",
+      "company": "DIMO S.p.A. - Euronics Tradate",
+      "location": "Via della Fornace Cortellezzi, 21049 Tradate (VA)",
+      "period": "June 2021 - Present",
+      "industry": "Retail of IT, home appliances, telephony, and games",
+      "description": "My main role is to assist customers throughout the purchasing process, from advising on the best product to ordering it from the store or another branch within the chain.\n\nI also handle customer product returns for technical assistance: after an initial test phase to diagnose the issue, I register the product and send it to headquarters, from where it is forwarded to the authorized repair center."
+    },
+    {
+      "title": "Frontend Developer",
+      "company": "MotorK",
+      "location": "Via Ludovico d'Aragona, 9, 20132 Milano (MI)",
+      "period": "March 2016 - December 2020",
+      "industry": "Technology company specialized in the automotive sector",
+      "description": "My main responsibility was developing WordPress themes designed to gather commercial data and generate leads based on client requirements.\n\nAdditionally, I created DEMs for mass communication and maintained websites within the proprietary platform. I was also part of the first and second-level technical support team, handling technical adjustments and modifications requested by clients via dedicated management software."
+    }
+  ]
+}

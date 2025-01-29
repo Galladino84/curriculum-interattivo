@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import ExperienceTabs from "./components/ExperienceTabs";
-import SkillsList from "./components/SkillsList";
 
 const fetchExperienceData = async () => {
   try {
@@ -29,23 +28,16 @@ const App = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      {/* Sidebar (max 28%) */}
-      <Sidebar
-        language={language}
-        setLanguage={setLanguage}
-        className="w-full md:w-1/4 xl:w-1/5"
-      />
+    <div className="grid grid-cols-1 md:grid-cols-10 h-screen">
+      {/* Sidebar (30% su desktop, 100% su mobile) */}
+      <div className="md:col-span-3 w-full bg-gray-900">
+        <Sidebar language={language} setLanguage={setLanguage} />
+      </div>
 
-      {/* Contenuto principale */}
-      <main className="p-6 flex-1 w-full">
-        <h1 className="text-2xl font-bold">Benvenuto!</h1>
-        <div className="mt-4">
-          <ExperienceTabs experiences={experiences} language={language} />
-        </div>
-        <div className="mt-8">
-          <SkillsList language={language} />
-        </div>
+      {/* Contenuto principale (70% su desktop, 100% su mobile) */}
+      <main className="p-6 md:col-span-7 w-full">
+        
+        <ExperienceTabs experiences={experiences} language={language} />
       </main>
     </div>
   );
