@@ -1,7 +1,7 @@
 {
   "name": "Fabrizio Gallazzi",
   "address": "Via Carducci 37B, 21010 Besnate (VA)",
-  "photo": "public/images/foto_profilo.jpeg",
+  "photo": "/images/foto_profilo.jpeg",
   "phone": {
     "it": "3498465891",
     "en": "3498465891"
