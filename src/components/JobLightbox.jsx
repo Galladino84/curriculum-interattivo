@@ -1,51 +1,37 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-const JobLightbox = ({ job, onClose }) => {
-  if (!job) return null;
+const JobLightbox = ({ experience, onClose }) => {
+  if (!experience) return null;
 
   return (
-    <motion.div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <AnimatePresence>
       <motion.div
-        className="bg-white p-6 rounded-lg shadow-xl max-w-lg relative"
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        exit={{ scale: 0.8 }}
-        transition={{ duration: 0.3 }}
+        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose} // Chiude il Lightbox cliccando fuori
       >
-        {/* Pulsante di chiusura */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 bg-red-500 text-white p-2 rounded-full hover:bg-red-700 transition"
+        <motion.div
+          className="bg-white text-black p-6 rounded-lg shadow-lg w-96 relative"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0.8 }}
+          onClick={(e) => e.stopPropagation()} // Evita chiusura su click interno
         >
-          ✖
-        </button>
-
-        {/* Logo Aziendale */}
-        {job.logo && (
-          <div className="flex justify-center mb-4">
-            <img
-              src={job.logo}
-              alt={`${job.company} logo`}
-              className="w-24 h-24 object-contain"
-            />
-          </div>
-        )}
-
-        {/* Titolo e dettagli */}
-        <h2 className="text-2xl font-bold text-gray-800">{job.title}</h2>
-        <h3 className="text-lg font-semibold text-gray-600">{job.company}</h3>
-        <p className="text-sm text-gray-500 mb-4">{job.date}</p>
-
-        {/* Descrizione del ruolo */}
-        <p className="text-gray-700 leading-relaxed">{job.description}</p>
+          <button
+            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full"
+            onClick={onClose}
+          >
+            ✖
+          </button>
+          <h2 className="text-xl font-bold">{experience.title}</h2>
+          <p className="text-gray-600">{experience.company}</p>
+          <p className="mt-2">{experience.description}</p>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
 };
 

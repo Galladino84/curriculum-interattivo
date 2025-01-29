@@ -1,52 +1,68 @@
 import React, { useState } from "react";
-import ExperienceList from "./ExperienceList";
+import Lightbox from "./Lightbox";
+import SkillsList from "./SkillsList";
 
-const ExperienceTabs = ({ experiences, language, setSelectedJob, t }) => {
-  console.log("✅ Dati passati a ExperienceList:", { experiences, language });
+const ExperienceTabs = ({ experiences, language }) => {
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [activeTab, setActiveTab] = useState("experience"); // "experience" | "skills"
 
-  // Controllo se experiences è un oggetto. Se è un array, lo correggiamo.
-  const safeExperiences =
-    !experiences || Array.isArray(experiences)
-      ? { it: [], en: [] }
-      : experiences;
-
-  const [activeTab, setActiveTab] = useState("experience");
+  // Se experiences è null o non ha dati per la lingua selezionata, inizializza un array vuoto
+  const experienceList = experiences?.[language] ?? [];
 
   return (
-    <div className="experience-tabs">
-      <div className="tab-buttons flex">
+    <div className="mt-6 w-full">
+      {/* TAB MENU */}
+      <div className="flex space-x-4 mb-4 border-b pb-2">
         <button
-          className={`px-4 py-2 ${
+          className={`px-4 py-2 rounded-t-lg ${
             activeTab === "experience"
-              ? "bg-gray-800 text-white"
-              : "bg-gray-300"
+              ? "bg-gray-200 font-semibold"
+              : "bg-gray-100"
           }`}
           onClick={() => setActiveTab("experience")}
         >
-          {t("Esperienza")}
+          Esperienze
         </button>
         <button
-          className={`px-4 py-2 ${
-            activeTab === "skills" ? "bg-gray-800 text-white" : "bg-gray-300"
+          className={`px-4 py-2 rounded-t-lg ${
+            activeTab === "skills" ? "bg-gray-200 font-semibold" : "bg-gray-100"
           }`}
           onClick={() => setActiveTab("skills")}
         >
-          {t("Competenze")}
+          Competenze
         </button>
       </div>
 
-      <div className="tab-content p-4">
-        {activeTab === "experience" ? (
-          <ExperienceList
-            experiences={safeExperiences}
-            language={language}
-            setSelectedJob={setSelectedJob}
-            t={t}
-          />
-        ) : (
-          <p className="text-gray-500">Sezione competenze in arrivo...</p>
-        )}
-      </div>
+      {/* CONTENUTO TAB */}
+      {activeTab === "experience" ? (
+        <>
+          <h3 className="text-xl font-bold mb-4">Esperienze lavorative</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {experienceList.map((experience, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedExperience(experience)}
+                className="w-full bg-white p-4 rounded-lg shadow-md text-left hover:bg-gray-100 transition duration-200 border border-gray-200"
+              >
+                <h4 className="text-lg font-semibold text-gray-800">
+                  {experience.title}
+                </h4>
+                <p className="text-gray-600">{experience.company}</p>
+              </button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <SkillsList language={language} />
+      )}
+
+      {/* Lightbox per visualizzare dettagli esperienza */}
+      {selectedExperience && (
+        <Lightbox
+          experience={selectedExperience}
+          onClose={() => setSelectedExperience(null)}
+        />
+      )}
     </div>
   );
 };

@@ -1,13 +1,14 @@
 {
     "name": "Fabrizio Gallazzi",
     "address": "Via Carducci 37B, 21010 Besnate (VA)",
+    "photo":"public/images/foto_profilo.jpeg",
     "phone": {
-      "hidden": true,
-      "value": "349 846 5891"
+        "it": "3498465891",
+        "en": "3498465891"
     },
     "email": {
-      "hidden": true,
-      "value": "fabrizio.gallazzi@gmail.com"
+        "it": "fabrizio.gallazzi@gmail.com ",
+        "en": "fabrizio.gallazzi@gmail.com"
     },
     "about": {
       "it": "Sono un Front-End Developer con esperienza nello sviluppo di interfacce moderne e usabilità.",

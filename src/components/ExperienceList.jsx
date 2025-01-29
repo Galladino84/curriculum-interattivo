@@ -1,30 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import JobLightbox from "./JobLightbox";
 
-const ExperienceList = ({ experiences, language }) => {
-  console.log("✅ Dati passati a ExperienceList:", { experiences, language });
+const ExperienceList = ({ experiences }) => {
+  const [selectedExperience, setSelectedExperience] = useState(null);
 
-  if (
-    !experiences ||
-    !experiences[language] ||
-    experiences[language].length === 0
-  ) {
-    return (
-      <p className="text-red-500">
-        ⚠️ Nessuna esperienza trovata per la lingua "{language}".
-      </p>
+  if (!Array.isArray(experiences) || experiences.length === 0) {
+    console.warn(
+      "⚠️ Nessuna esperienza trovata o dati non validi:",
+      experiences
     );
+    return <p className="text-white p-4">⚠️ Nessuna esperienza trovata</p>;
   }
 
   return (
-    <div>
-      {experiences[language].map((exp, index) => (
-        <div key={index} className="mb-4 p-4 border border-gray-300 rounded-lg">
-          <h3 className="text-xl font-bold">{exp.title}</h3>
-          <p className="text-gray-700">{exp.company}</p>
-          <p className="text-gray-600">{exp.date}</p>
-          <p className="text-gray-500">{exp.description}</p>
-        </div>
-      ))}
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4 text-white">
+        Esperienze Lavorative
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {experiences.map((exp, index) => (
+          <div
+            key={index}
+            className="bg-gray-800 text-white p-4 rounded-lg cursor-pointer hover:bg-gray-700 transition"
+            onClick={() => {
+              console.log("📌 Click su esperienza:", exp);
+              setSelectedExperience(exp);
+            }}
+          >
+            <h3 className="text-lg font-semibold">{exp.title}</h3>
+            <p className="text-sm text-gray-400">{exp.company}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Lightbox */}
+      {selectedExperience && (
+        <JobLightbox
+          experience={selectedExperience}
+          onClose={() => setSelectedExperience(null)}
+        />
+      )}
     </div>
   );
 };

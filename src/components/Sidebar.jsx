@@ -1,77 +1,85 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Funzione per caricare i dati JSON
+const fetchPersonalData = async () => {
+  try {
+    const response = await fetch("/personal_data.json");
+    if (!response.ok) throw new Error("Errore nel caricamento del JSON");
+    return await response.json();
+  } catch (error) {
+    console.error("❌ Errore nel caricamento dei dati personali:", error);
+    return null;
+  }
+};
+
 const Sidebar = ({ language, setLanguage }) => {
   const [personalData, setPersonalData] = useState(null);
+  const [showContacts, setShowContacts] = useState(false);
 
   useEffect(() => {
-    fetch("/personal_data.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("Errore nel caricamento del JSON");
-        return response.json();
-      })
-      .then((data) => setPersonalData(data))
-      .catch((error) => console.error("❌ Errore nel caricamento:", error));
+    fetchPersonalData().then((data) => {
+      if (data) {
+        setPersonalData(data);
+        console.log("✅ Dati Sidebar ricevuti:", data);
+      }
+    });
   }, []);
 
   if (!personalData) {
-    return <p className="text-red-500 text-center">⌛ Caricamento dati...</p>;
+    return <p className="text-white p-4">⏳ Caricamento dati...</p>;
   }
 
   return (
-    <aside className="w-64 p-6 bg-gray-900 text-white flex flex-col items-center">
-      {/* Immagine Profilo */}
-      {personalData.photo && (
+    <motion.aside
+      initial={{ width: "100%" }}
+      animate={{ width: "100%" }}
+      className="bg-gray-900 text-white h-auto md:h-screen w-full md:w-1/4 xl:w-1/4 fixed md:relative top-0 left-0 shadow-lg overflow-hidden"
+    >
+      <div className="h-full flex flex-col items-center p-6">
         <img
           src={personalData.photo}
-          alt="Profilo"
-          className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg mb-4"
+          alt="Profile"
+          className="w-24 h-24 rounded-full border-2 border-white"
         />
-      )}
+        <h1 className="text-xl font-bold mt-2">{personalData.name}</h1>
+        <p className="text-sm text-gray-400">{personalData.address}</p>
 
-      {/* Nome e Indirizzo */}
-      <h2 className="text-2xl font-bold">{personalData.name}</h2>
-      <p className="text-gray-400 text-sm">{personalData.address}</p>
+        <button
+          onClick={() => setShowContacts(!showContacts)}
+          className="mt-2 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-sm"
+        >
+          {showContacts
+            ? language === "it"
+              ? "Nascondi Contatti"
+              : "Hide Contacts"
+            : language === "it"
+            ? "Mostra Contatti"
+            : "Show Contacts"}
+        </button>
 
-      {/* Email e Telefono (Solo se definiti) */}
-      <div className="mt-4 text-center">
-        {personalData.email && personalData.email.trim() !== "" ? (
-          <p className="text-sm">
-            📧{" "}
-            <a
-              href={`mailto:${personalData.email}`}
-              className="text-blue-400 hover:underline"
+        <AnimatePresence>
+          {showContacts && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-2 p-3 bg-gray-800 rounded-lg text-sm text-gray-300 w-full text-center"
             >
-              {personalData.email}
-            </a>
-          </p>
-        ) : (
-          <p className="text-gray-500 text-sm">Email non disponibile</p>
-        )}
+              <p>📞 {personalData.phone[language]}</p>
+              <p>📧 {personalData.email[language]}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {personalData.phone && personalData.phone.trim() !== "" ? (
-          <p className="text-sm">
-            📞{" "}
-            <a
-              href={`tel:${personalData.phone}`}
-              className="text-green-400 hover:underline"
-            >
-              {personalData.phone}
-            </a>
-          </p>
-        ) : (
-          <p className="text-gray-500 text-sm">Telefono non disponibile</p>
-        )}
+        <button
+          onClick={() => setLanguage(language === "it" ? "en" : "it")}
+          className="mt-4 px-4 py-2 bg-green-500 rounded-lg hover:bg-green-400 w-full"
+        >
+          {language === "it" ? "Cambia Lingua" : "Change Language"}
+        </button>
       </div>
-
-      {/* Bottone Cambia Lingua */}
-      <button
-        onClick={() => setLanguage(language === "it" ? "en" : "it")}
-        className="mt-6 px-4 py-2 bg-blue-500 hover:bg-blue-700 rounded text-white transition-all"
-      >
-        🌍 Cambia Lingua ({language === "it" ? "🇬🇧 English" : "🇮🇹 Italiano"})
-      </button>
-    </aside>
+    </motion.aside>
   );
 };
 

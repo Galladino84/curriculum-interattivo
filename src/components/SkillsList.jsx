@@ -1,38 +1,46 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
 
-const levelColors = {
-  Iniziale: "bg-gray-400",
-  Base: "bg-yellow-400",
-  Intermedio: "bg-blue-400",
-  Avanzato: "bg-green-500",
+const fetchSkillsData = async () => {
+  try {
+    const response = await fetch("/skills.json");
+    if (!response.ok) throw new Error("Errore nel caricamento delle skill");
+    return await response.json();
+  } catch (error) {
+    console.error("❌ Errore nel caricamento delle skill:", error);
+    return null;
+  }
 };
 
-const levelWidths = {
-  Iniziale: "w-1/4",
-  Base: "w-2/4",
-  Intermedio: "w-3/4",
-  Avanzato: "w-full",
-};
+const SkillsList = ({ language }) => {
+  const [skills, setSkills] = useState([]);
 
-const SkillsList = ({ skills, language }) => {
+  useEffect(() => {
+    fetchSkillsData().then((data) => {
+      if (data) {
+        console.log("✅ Skill ricevute:", data);
+        setSkills(data[language] ?? []); // Evita valori null o undefined
+      }
+    });
+  }, [language]);
+
+  if (!skills || skills.length === 0) {
+    return <p className="text-gray-500">⚠️ Nessuna skill disponibile.</p>;
+  }
+
   return (
-    <div className="space-y-4">
-      {skills.map((skill, index) => (
-        <div key={index}>
-          <p>{skill.name[language]}</p>
-          <div className="bg-gray-200 w-full rounded-md overflow-hidden">
-            <motion.div
-              className={`h-4 ${levelColors[skill.level[language]]} ${
-                levelWidths[skill.level[language]]
-              }`}
-              initial={{ width: "0%" }}
-              animate={{ width: levelWidths[skill.level[language]] }}
-              transition={{ duration: 1.5 }}
-            />
+    <div className="mt-6">
+      <h3 className="text-xl font-bold">Competenze</h3>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {skills.map((skill, index) => (
+          <div
+            key={index}
+            className="bg-white p-4 rounded-lg shadow-md text-center"
+          >
+            <h4 className="text-lg font-semibold">{skill.name}</h4>
+            <p className="text-gray-600">{skill.level}</p>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
