@@ -1,30 +1,26 @@
 {
     "it": [
       {
-        "company": "Euronics DIMO",
-        "role": "Addetto Vendite",
-        "date": "2020 - Presente",
-        "description": "Gestione vendite, assistenza clienti e consulenza tecnica su prodotti elettronici."
+        "title": "Software Developer",
+        "company": "Tech Corp",
+        "date": "2020 - Present"
       },
       {
-        "company": "Freelance",
-        "role": "Front-End Developer",
-        "date": "2016 - 2020",
-        "description": "Sviluppo di interfacce web moderne e user-friendly con React e Tailwind CSS."
+        "title": "Web Designer",
+        "company": "Web Studio",
+        "date": "2018 - 2020"
       }
     ],
     "en": [
       {
-        "company": "Euronics DIMO",
-        "role": "Sales Assistant",
-        "date": "2020 - Present",
-        "description": "Sales management, customer service, and technical consultancy on electronic products."
+        "title": "Software Developer",
+        "company": "Tech Corp",
+        "date": "2020 - Present"
       },
       {
-        "company": "Freelance",
-        "role": "Front-End Developer",
-        "date": "2016 - 2020",
-        "description": "Development of modern and user-friendly web interfaces using React and Tailwind CSS."
+        "title": "Web Designer",
+        "company": "Web Studio",
+        "date": "2018 - 2020"
       }
     ]
   }

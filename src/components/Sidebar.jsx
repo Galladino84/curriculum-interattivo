@@ -1,93 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Sidebar = ({ language, setLanguage, personalData }) => {
-  const [showPhone, setShowPhone] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
-  const [sidebarColor, setSidebarColor] = useState("bg-gray-800");
+const Sidebar = ({ language, setLanguage }) => {
+  const [personalData, setPersonalData] = useState(null);
 
-  const toggleColor = () => {
-    const colors = [
-      "bg-gray-800",
-      "bg-blue-800",
-      "bg-green-800",
-      "bg-purple-800",
-      "bg-red-800",
-    ];
-    setSidebarColor(colors[Math.floor(Math.random() * colors.length)]);
-  };
+  useEffect(() => {
+    fetch("/personal_data.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("Errore nel caricamento del JSON");
+        return response.json();
+      })
+      .then((data) => setPersonalData(data))
+      .catch((error) => console.error("❌ Errore nel caricamento:", error));
+  }, []);
+
+  if (!personalData) {
+    return <p className="text-red-500 text-center">⌛ Caricamento dati...</p>;
+  }
 
   return (
-    <aside className={`${sidebarColor} text-white p-6 w-1/4 fixed h-full`}>
-      <button
-        onClick={toggleColor}
-        className="mb-4 px-4 py-2 bg-white text-gray-800 rounded-lg"
-      >
-        {language === "it" ? "Cambia Colore" : "Change Color"}
-      </button>
+    <aside className="w-64 p-6 bg-gray-900 text-white flex flex-col items-center">
+      {/* Immagine Profilo */}
+      {personalData.photo && (
+        <img
+          src={personalData.photo}
+          alt="Profilo"
+          className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg mb-4"
+        />
+      )}
 
-      <select
-        className="mb-4 p-2 bg-white text-gray-800 rounded"
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-      >
-        <option value="it">Italiano</option>
-        <option value="en">English</option>
-      </select>
+      {/* Nome e Indirizzo */}
+      <h2 className="text-2xl font-bold">{personalData.name}</h2>
+      <p className="text-gray-400 text-sm">{personalData.address}</p>
 
-      <img
-        src="/profile.jpg"
-        alt={personalData.name}
-        className="rounded-full mx-auto w-24 border-2 border-white"
-      />
-      <h2 className="text-center text-xl mt-4">{personalData.name}</h2>
-      <p className="text-center mt-2">{personalData.address}</p>
-
-      <div className="text-center mt-2">
-        <button
-          onClick={() => setShowPhone(true)}
-          className="text-blue-400 hover:underline"
-        >
-          {showPhone ? personalData.phone.value : "Mostra Telefono"}
-        </button>
-      </div>
-      <div className="text-center mt-2">
-        <button
-          onClick={() => setShowEmail(true)}
-          className="text-blue-400 hover:underline"
-        >
-          {showEmail ? personalData.email.value : "Mostra Email"}
-        </button>
-      </div>
-
-      <p className="text-center mt-4">{personalData.about[language]}</p>
-      <button
-        onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
-        className="block w-full mt-4 px-4 py-2 bg-white text-gray-800 rounded-lg"
-      >
-        {language === "it" ? "Più Info" : "More Info"}
-      </button>
-
-      <AnimatePresence>
-        {showAdditionalInfo && (
-          <motion.div
-            className="absolute top-0 left-0 w-full h-full p-6 pt-12 bg-gray-900 text-white rounded-lg shadow-lg"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.5 }}
-          >
-            <button
-              onClick={() => setShowAdditionalInfo(false)}
-              className="absolute top-2 right-4 text-white text-lg bg-red-600 px-3 py-1 rounded"
+      {/* Email e Telefono (Solo se definiti) */}
+      <div className="mt-4 text-center">
+        {personalData.email && personalData.email.trim() !== "" ? (
+          <p className="text-sm">
+            📧{" "}
+            <a
+              href={`mailto:${personalData.email}`}
+              className="text-blue-400 hover:underline"
             >
-              ✖
-            </button>
-            <p>{personalData.additionalInfo[language]}</p>
-          </motion.div>
+              {personalData.email}
+            </a>
+          </p>
+        ) : (
+          <p className="text-gray-500 text-sm">Email non disponibile</p>
         )}
-      </AnimatePresence>
+
+        {personalData.phone && personalData.phone.trim() !== "" ? (
+          <p className="text-sm">
+            📞{" "}
+            <a
+              href={`tel:${personalData.phone}`}
+              className="text-green-400 hover:underline"
+            >
+              {personalData.phone}
+            </a>
+          </p>
+        ) : (
+          <p className="text-gray-500 text-sm">Telefono non disponibile</p>
+        )}
+      </div>
+
+      {/* Bottone Cambia Lingua */}
+      <button
+        onClick={() => setLanguage(language === "it" ? "en" : "it")}
+        className="mt-6 px-4 py-2 bg-blue-500 hover:bg-blue-700 rounded text-white transition-all"
+      >
+        🌍 Cambia Lingua ({language === "it" ? "🇬🇧 English" : "🇮🇹 Italiano"})
+      </button>
     </aside>
   );
 };

@@ -5,43 +5,50 @@ import JobLightbox from "./components/JobLightbox";
 
 const App = () => {
   const [language, setLanguage] = useState("it");
-  const [personalData, setPersonalData] = useState(null);
-  const [experiences, setExperiences] = useState(null);
+  const [experiences, setExperiences] = useState({ it: [], en: [] });
   const [selectedJob, setSelectedJob] = useState(null);
 
+  // Caricamento esperienze da file JSON
   useEffect(() => {
-    Promise.all([
-      fetch("/personal_data.json").then((res) => res.json()),
-      fetch("/experiences.json").then((res) => res.json()),
-    ])
-      .then(([personalData, experiences]) => {
-        setPersonalData(personalData);
-        setExperiences(experiences);
+    fetch("/experiences.json")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ Dati ricevuti:", data);
+
+        // Verifica che i dati siano un oggetto con chiavi 'it' e 'en'
+        if (data && typeof data === "object" && !Array.isArray(data)) {
+          setExperiences(data);
+        } else {
+          console.error(
+            "❌ Errore: Il formato di experiences.json non è corretto."
+          );
+        }
       })
-      .catch((error) => console.error("Errore nel caricamento dati:", error));
+      .catch((error) =>
+        console.error("❌ Errore nel caricamento delle esperienze:", error)
+      );
   }, []);
 
-  if (!personalData || !experiences) {
-    return <p>Caricamento dati...</p>;
-  }
-
   return (
-    <div className="flex h-screen">
-      <Sidebar
-        language={language}
-        setLanguage={setLanguage}
-        personalData={personalData}
-      />
-      <div className="flex-1 flex flex-col items-center p-6 overflow-auto bg-gray-100">
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar language={language} setLanguage={setLanguage} />
+
+      {/* Contenuto principale */}
+      <div className="flex-1 p-6">
+        <h1 className="text-2xl font-bold">Portfolio di Fabrizio Gallazzi</h1>
+
+        {/* Componenti con gestione della lingua */}
         <ExperienceTabs
           experiences={experiences}
-          personalData={personalData}
+          language={language}
           setSelectedJob={setSelectedJob}
+          t={(key) => key} // Mock funzione di traduzione
         />
-      </div>
-      {selectedJob && (
+
+        {/* Lightbox per mostrare i dettagli del lavoro */}
         <JobLightbox job={selectedJob} onClose={() => setSelectedJob(null)} />
-      )}
+      </div>
     </div>
   );
 };
